@@ -25,9 +25,9 @@
         </include>
     </source>
 
-    <coverage pathCoverage="false">
+    <!-- <coverage pathCoverage="false">
           <report>
             <html outputDirectory="tests-coverage" />
           </report>
-    </coverage>
+    </coverage> -->
 </phpunit>

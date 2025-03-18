@@ -49,14 +49,19 @@ class Decoder
             $blocks[bin2hex($cid)] = $dataPart;
         }
 
+        dd($blocks);
+
         $decoded = [];
 
         // decode each block data
         foreach ($blocks as $cid => $data) {
-            $decoded[] = $this->decoder->decode(StringStream::create($data));
+            $decoded[] = new CarBlock($this->decoder->decode(StringStream::create($data)));
         }
 
-        return new CarData($header, $decoded);
+        return new CarData(
+            new CarHeader($header),
+            $decoded
+        );
     }
 
     private function readVar(string $data, int &$offset = 0): string

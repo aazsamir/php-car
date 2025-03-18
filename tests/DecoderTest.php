@@ -14,6 +14,7 @@ class DecoderTest extends TestCase
         $data = \file_get_contents(__DIR__.'/fixtures/carv1-basic.car');
         $decoder = Decoder::new();
         $carData = $decoder->decode($data);
-        dd($carData);
+        
+        dd($carData->toArray());
     }
 }
