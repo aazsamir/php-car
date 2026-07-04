@@ -26,6 +26,6 @@ readonly class CarBlocks
      */
     public function toArray(): array
     {
-        return array_map(fn (CarBlock $block) => $block->toArray(), $this->items);
+        return array_map(static fn (CarBlock $block) => $block->toArray(), $this->items);
     }
 }

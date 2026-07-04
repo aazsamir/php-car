@@ -20,8 +20,8 @@ final class ByteReader
                 throw new UnexpectedEof('Unexpected EOF while reading varint');
             }
 
-            $byte = ord($this->bytes[$this->offset++]);
-            $result |= ($byte & 0x7f) << $shift;
+            $byte = \ord($this->bytes[$this->offset++]);
+            $result |= ($byte & 0x7F) << $shift;
 
             if (($byte & 0x80) === 0) {
                 break;
@@ -41,7 +41,7 @@ final class ByteReader
     {
         $data = substr($this->bytes, $this->offset, $length);
 
-        if (strlen($data) !== $length) {
+        if (\strlen($data) !== $length) {
             throw new UnexpectedEof('Unexpected EOF while reading bytes');
         }
 

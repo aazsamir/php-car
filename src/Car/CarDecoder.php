@@ -4,9 +4,8 @@ declare(strict_types=1);
 
 namespace Aazsamir\PhpCar\Car;
 
-use Aazsamir\PhpCar\Car\CID;
-use Aazsamir\PhpCar\Bytes\Multihash;
 use Aazsamir\PhpCar\Bytes\ByteReader;
+use Aazsamir\PhpCar\Bytes\Multihash;
 use CBOR\Decoder as CBORDecoder;
 use CBOR\StringStream;
 use CBOR\Tag\Base16EncodingTag;
@@ -72,7 +71,7 @@ readonly class CarDecoder
         $header = $this->decoder->decode(StringStream::create($reader->readBytes($headerLength)));
         $blocks = [];
 
-        while (strlen($reader->remaining()) > 0) {
+        while ($reader->remaining() !== '') {
             $blockLength = $reader->readVarint();
 
             if ($blockLength === 0) {
@@ -101,11 +100,11 @@ readonly class CarDecoder
 
     private function parseCidLength(string $cidData): int
     {
-        if (strlen($cidData) < 2) {
+        if (\strlen($cidData) < 2) {
             throw new CarException('CID data too short');
         }
 
-        $firstByte = ord($cidData[0]);
+        $firstByte = \ord($cidData[0]);
 
         // handle CIDv1
         if ($firstByte === 0x01) {
@@ -133,7 +132,7 @@ readonly class CarDecoder
             multihash: new Multihash(
                 code: 0x12,
                 length: 32,
-                digest: \hash('sha256', (string) $block->cbor, true)
+                digest: hash('sha256', (string) $block->cbor, true)
             ),
         );
 

@@ -35,7 +35,7 @@ final class Multibase
         $bits = 0;
         $output = '';
 
-        $len = strlen($input);
+        $len = \strlen($input);
 
         for ($i = 0; $i < $len; $i++) {
             $pos = strpos($alphabet, $input[$i]);
@@ -49,7 +49,7 @@ final class Multibase
 
             if ($bits >= 8) {
                 $bits -= 8;
-                $output .= chr(($buffer >> $bits) & 0xFF);
+                $output .= \chr(($buffer >> $bits) & 0xFF);
             }
         }
 
@@ -64,10 +64,10 @@ final class Multibase
         $bits = 0;
         $output = '';
 
-        $len = strlen($bytes);
+        $len = \strlen($bytes);
 
         for ($i = 0; $i < $len; $i++) {
-            $buffer = ($buffer << 8) | ord($bytes[$i]);
+            $buffer = ($buffer << 8) | \ord($bytes[$i]);
             $bits += 8;
 
             while ($bits >= 5) {

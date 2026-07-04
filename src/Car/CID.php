@@ -4,17 +4,17 @@ declare(strict_types=1);
 
 namespace Aazsamir\PhpCar\Car;
 
-use Aazsamir\PhpCar\Bytes\Multibase;
-use Aazsamir\PhpCar\Bytes\Varint;
 use Aazsamir\PhpCar\Bytes\ByteReader;
+use Aazsamir\PhpCar\Bytes\Multibase;
 use Aazsamir\PhpCar\Bytes\Multihash;
+use Aazsamir\PhpCar\Bytes\Varint;
 
 final readonly class CID
 {
     public function __construct(
         public int $version,
         public int $codec,
-        public Multihash $multihash
+        public Multihash $multihash,
     ) {}
 
     public static function fromBytes(string $bytes): self
@@ -69,8 +69,8 @@ final readonly class CID
     public function equals(self $other): bool
     {
         return
-            $this->version === $other->version &&
-            $this->codec === $other->codec &&
-            $this->multihash === $other->multihash;
+            $this->version === $other->version
+            && $this->codec === $other->codec
+            && $this->multihash === $other->multihash;
     }
 }

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Aazsamir\PhpCar\Bytes;
 
 final class Varint
@@ -9,14 +11,14 @@ final class Varint
         $out = '';
 
         while (true) {
-            $byte = $value & 0x7f;
+            $byte = $value & 0x7F;
             $value >>= 7;
 
             if ($value !== 0) {
                 $byte |= 0x80;
-                $out .= chr($byte);
+                $out .= \chr($byte);
             } else {
-                $out .= chr($byte);
+                $out .= \chr($byte);
 
                 break;
             }

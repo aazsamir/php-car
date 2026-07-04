@@ -15,11 +15,11 @@ readonly class CarHeader
 
     public function cborRoots(): ListObject
     {
-        if (! $this->cbor->has('roots')) {
+        if (!$this->cbor->has('roots')) {
             throw new CarException('Missing roots in CAR header');
         }
 
-        if (! $this->cbor->get('roots') instanceof ListObject) {
+        if (!$this->cbor->get('roots') instanceof ListObject) {
             throw new CarException('Invalid roots in CAR header');
         }
 
@@ -34,8 +34,8 @@ readonly class CarHeader
         $roots = [];
 
         foreach ($this->cborRoots() as $root) {
-            if (! $root instanceof IpldTag) {
-                throw new CarException('Expected IpldTag, got ' . get_class($root));
+            if (!$root instanceof IpldTag) {
+                throw new CarException('Expected IpldTag, got ' . $root::class);
             }
 
             $roots[] = $root->normalize();

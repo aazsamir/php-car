@@ -13,9 +13,6 @@ readonly class CarBlock
         public CBORObject&Normalizable $cbor,
     ) {}
 
-    /**
-     * @return mixed
-     */
     public function toArray(): mixed
     {
         return $this->cbor->normalize();

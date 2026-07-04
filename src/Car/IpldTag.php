@@ -4,12 +4,10 @@ declare(strict_types=1);
 
 namespace Aazsamir\PhpCar\Car;
 
-use Aazsamir\PhpCar\Car\CID;
 use CBOR\ByteStringObject;
 use CBOR\CBORObject;
 use CBOR\Normalizable;
 use CBOR\Tag;
-use InvalidArgumentException;
 
 final class IpldTag extends Tag implements Normalizable
 {
@@ -18,8 +16,8 @@ final class IpldTag extends Tag implements Normalizable
 
     public function __construct(int $additionalInformation, ?string $data, CBORObject $object)
     {
-        if (! $object instanceof ByteStringObject) {
-            throw new InvalidArgumentException('This tag only accepts a Byte String object.');
+        if (!$object instanceof ByteStringObject) {
+            throw new \InvalidArgumentException('This tag only accepts a Byte String object.');
         }
         parent::__construct($additionalInformation, $data, $object);
         $this->cid = CID::fromBytes($object->getValue());

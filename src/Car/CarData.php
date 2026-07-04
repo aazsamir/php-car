@@ -15,7 +15,7 @@ readonly class CarData
     {
         return [
             'header' => $this->header->toArray(),
-            'blocks' => array_map(fn(CarBlock $block) => $block->toArray(), $this->blocks->items())
+            'blocks' => array_map(static fn (CarBlock $block) => $block->toArray(), $this->blocks->items()),
         ];
     }
 }
