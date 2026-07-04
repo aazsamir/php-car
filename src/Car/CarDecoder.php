@@ -7,6 +7,8 @@ namespace Aazsamir\PhpCar\Car;
 use Aazsamir\PhpCar\Bytes\ByteReader;
 use Aazsamir\PhpCar\Bytes\Multihash;
 use CBOR\Decoder as CBORDecoder;
+use CBOR\MapObject;
+use CBOR\Normalizable;
 use CBOR\StringStream;
 use CBOR\Tag\Base16EncodingTag;
 use CBOR\Tag\Base64EncodingTag;
@@ -85,11 +87,21 @@ readonly class CarDecoder
             $cid = CID::fromBytes($cid);
 
             $dataPart = substr($blockData, $cidLength);
-            $block = new CarBlock($this->decoder->decode(StringStream::create($dataPart)));
+            $block = $this->decoder->decode(StringStream::create($dataPart));
+
+            if (!$block instanceof Normalizable) {
+                throw new CarException('Invalid block data');
+            }
+
+            $block = new CarBlock($block);
 
             $this->verify($cid, $block);
 
             $blocks[$cid->toString()] = $block;
+        }
+
+        if (! $header instanceof MapObject) {
+            throw new CarException('Invalid CAR header');
         }
 
         return new CarData(

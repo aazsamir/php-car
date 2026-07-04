@@ -11,6 +11,9 @@ readonly class CarData
         public CarBlocks $blocks,
     ) {}
 
+    /**
+     * @return array<string, mixed>
+     */
     public function toArray(): array
     {
         return [
