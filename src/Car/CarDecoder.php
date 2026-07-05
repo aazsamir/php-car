@@ -44,7 +44,7 @@ readonly class CarDecoder
         );
     }
 
-    private static function tagManager(): TagManager
+    public static function tagManager(): TagManager
     {
         return TagManager::create([
             0 => DatetimeTag::class,
